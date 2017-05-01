@@ -4,10 +4,17 @@ import './App.css';
 
 class Choice extends Component {
   render() {
+    var btnDeleteClass = this.props.len <= 2 ? 'btn btn-block btn-delete disabled' : 'btn btn-block btn-delete';
     return (
-      <div id={this.props.id}>
-        <input name={"choice" + this.props.id} type="text" />
-        <button id={this.props.id} onClick={this.props.deleteClick}>-</button>
+      <div className="row" id={this.props.id}>
+        <div className="col-xs-12">
+          <div className="input-group">
+            <input className="form-control" name={"choice" + this.props.id} type="text" />
+            <span className="input-group-btn">
+              <button className={btnDeleteClass} id={this.props.id} onClick={this.props.deleteClick}>-</button>
+            </span>
+          </div>
+        </div>
       </div>
     );
   }
@@ -17,7 +24,7 @@ class ChoiceList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      choiceList : [0, 1]
+      choiceList : [0, 1],
     };
     this.addChoice = this.addChoice.bind(this);
     this.deleteChoice = this.deleteChoice.bind(this);
@@ -40,28 +47,46 @@ class ChoiceList extends Component {
 
   deleteChoice(e) {
     e.preventDefault();
-    var newList = this.state.choiceList;
-    var deleteItem = Number(e.target.getAttribute('id'));
-    var deleteIndex = newList.indexOf(deleteItem);
-    newList.splice(deleteIndex, 1);
-    this.setState({
-      choiceList : newList
-    });
+    var choiceLength = this.state.choiceList.length;
+    if (choiceLength > 2) {
+      var newList = this.state.choiceList;
+      var deleteItem = Number(e.target.getAttribute('id'));
+      var deleteIndex = newList.indexOf(deleteItem);
+      newList.splice(deleteIndex, 1);
+      this.setState({
+        choiceList : newList
+      });
+    }
   }
 
   render() {
+    var choiceLength = this.state.choiceList.length;
     var choices = [];
     this.state.choiceList.forEach(function(num) {
-      choices.push(<Choice key={num} id={num} deleteClick={this.deleteChoice} />);
+      choices.push(<Choice key={num} id={num} deleteClick={this.deleteChoice} len={choiceLength} />);
       }, this
     );
     return (
-      <form>
+      <div className="col-xs-12 col-sm-5 col-md-4">
+        <div className="choice-list">
+          <form>
+            { choices }
+            <button className="btn btn-block btn-add" onClick={this.addChoice}>+</button>
+          </form>
+        </div>
+      </div>
+    );
+  }
+}
 
-        { choices }
-        <button onClick={this.addChoice}>+</button>
-      { this.props.children }
-      </form>
+class ChoiceAnswer extends Component {
+  render() {
+    return (
+      <div className="col-xs-12 col-sm-7 col-md-8">
+        <div className="choice-answer">
+          asdf
+        </div>
+      </div>
     );
   }
 }
@@ -69,8 +94,9 @@ class ChoiceList extends Component {
 class Chooser extends Component {
   render() {
     return (
-      <div>
+      <div className="row">
         <ChoiceList />
+        <ChoiceAnswer />
       </div>
     );
   }
