@@ -1,0 +1,25 @@
+/**{background-color: rgba(255, 0, 0, 0.15);}
+* *{background-color: rgba(0, 255, 0, 0.15);}
+* * *{background-color: rgba(0, 0, 255, 0.15);}
+* * * *{background-color: rgba(255, 255, 0, 0.15);}
+* * * * *{background-color: rgba(255, 0, 255, 0.15);}*/
+
+.choice-list {
+    margin: 6px;
+}
+.choice-answer {
+    margin: 6px;
+}
+.input-group {
+    margin: 6px 0;
+}
+.btn {
+    color: #ffffff;
+}
+.btn-delete {
+    background-color: #FF9605;
+}
+.btn-add {
+    margin: 6px 0;
+    background-color: #0069cd;
+}
