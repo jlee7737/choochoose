@@ -16,10 +16,13 @@
 .btn {
     color: #ffffff;
 }
+.btn:focus {
+	outline: 0;
+}
 .btn-delete {
-    background-color: #FF9605;
+    background-color: #ff0000;
 }
 .btn-add {
     margin: 6px 0;
-    background-color: #0069cd;
+    background-color: #0000ff;
 }
